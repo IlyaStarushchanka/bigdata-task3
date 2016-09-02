@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Ilya_Starushchanka on 9/2/2016.
  */
-public class VisitsAndSpendsWritable  {
+public class VisitsAndSpendsWritable implements WritableComparable<VisitsAndSpendsWritable> {
 
     private int visitsCount;
     private int spendsCount;
@@ -74,4 +74,12 @@ public class VisitsAndSpendsWritable  {
                 '}';
     }
 
+    @Override
+    public int compareTo(VisitsAndSpendsWritable o) {
+        if (Integer.compare(visitsCount,o.getVisitsCount()) == 0 ) {
+            return Integer.compare(spendsCount,o.getSpendsCount());
+        } else {
+            return Integer.compare(visitsCount,o.getVisitsCount());
+        }
+    }
 }
