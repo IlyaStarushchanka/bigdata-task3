@@ -23,8 +23,8 @@ import java.util.regex.Pattern;
  */
 public class VisitsAndSpendsCount {
 
-    public static class CountMapper extends Mapper<LongWritable, Text, Text, VisitsAndSpendsWrapper> {
-        private final VisitsAndSpendsWrapper visitsAndSpendsWrapper = new VisitsAndSpendsWrapper();
+    public static class CountMapper extends Mapper<LongWritable, Text, Text, VisitsAndSpendsWritable> {
+        private final VisitsAndSpendsWritable visitsAndSpendsWritable = new VisitsAndSpendsWritable();
         private Text ip = new Text();
 
         @Override
@@ -39,21 +39,21 @@ public class VisitsAndSpendsCount {
             if (m.find()){
                 String ipStr = m.group();
                 ip.set(ipStr);
-                visitsAndSpendsWrapper.setVisitsCount(1);
-                visitsAndSpendsWrapper.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
-                context.write(ip,visitsAndSpendsWrapper);
+                visitsAndSpendsWritable.setVisitsCount(1);
+                visitsAndSpendsWritable.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
+                context.write(ip, visitsAndSpendsWritable);
             }
         }
     }
 
-    public static class CountReduce extends Reducer<Text, VisitsAndSpendsWrapper, Text, VisitsAndSpendsWrapper>{
-        private VisitsAndSpendsWrapper result = new VisitsAndSpendsWrapper();
+    public static class CountReduce extends Reducer<Text, VisitsAndSpendsWritable, Text, VisitsAndSpendsWritable>{
+        private VisitsAndSpendsWritable result = new VisitsAndSpendsWritable();
 
         @Override
-        protected void reduce(Text ip, Iterable<VisitsAndSpendsWrapper> values, Context context) throws IOException, InterruptedException {
+        protected void reduce(Text ip, Iterable<VisitsAndSpendsWritable> values, Context context) throws IOException, InterruptedException {
             int sumPrice = 0;
             int sumVisits = 0;
-            Iterator<VisitsAndSpendsWrapper> itr = values.iterator();
+            Iterator<VisitsAndSpendsWritable> itr = values.iterator();
             while (itr.hasNext()){
                 sumPrice += itr.next().getSpendsCount();
                 sumVisits += itr.next().getVisitsCount();

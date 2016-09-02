@@ -1,5 +1,7 @@
 package com.epam.bigdata.mapreduce;
 
+import org.apache.hadoop.io.WritableComparable;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -7,14 +9,14 @@ import java.io.IOException;
 /**
  * Created by Ilya_Starushchanka on 9/2/2016.
  */
-public class VisitsAndSpendsWrapper {
+public class VisitsAndSpendsWritable implements WritableComparable<VisitsAndSpendsWritable> {
 
     private int visitsCount;
     private int spendsCount;
 
-    public VisitsAndSpendsWrapper(){}
+    public VisitsAndSpendsWritable(){}
 
-    public VisitsAndSpendsWrapper(int visitsCount, int spendsCount){
+    public VisitsAndSpendsWritable(int visitsCount, int spendsCount){
         this.visitsCount = visitsCount;
         this.spendsCount = spendsCount;
     }
@@ -48,9 +50,9 @@ public class VisitsAndSpendsWrapper {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof VisitsAndSpendsWrapper)) return false;
+        if (!(o instanceof VisitsAndSpendsWritable)) return false;
 
-        VisitsAndSpendsWrapper that = (VisitsAndSpendsWrapper) o;
+        VisitsAndSpendsWritable that = (VisitsAndSpendsWritable) o;
 
         if (getVisitsCount() != that.getVisitsCount()) return false;
         return getSpendsCount() == that.getSpendsCount();
@@ -66,9 +68,18 @@ public class VisitsAndSpendsWrapper {
 
     @Override
     public String toString() {
-        return "VisitsAndSpendsWrapper{" +
+        return "VisitsAndSpendsWritable{" +
                 "visitsCount=" + visitsCount +
                 ", spendsCount=" + spendsCount +
                 '}';
+    }
+
+    @Override
+    public int compareTo(VisitsAndSpendsWritable o) {
+        if (Integer.compare(visitsCount,o.getVisitsCount()) == 0 ) {
+            return Integer.compare(spendsCount,o.getSpendsCount());
+        } else {
+            return Integer.compare(visitsCount,o.getVisitsCount());
+        }
     }
 }
