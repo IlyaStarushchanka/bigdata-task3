@@ -75,7 +75,7 @@ public class TagsCount {
                 BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath.toString()));
                 String stopWord = null;
                 while((stopWord = bufferedReader.readLine()) != null) {
-                    stopWords.add(stopWord.toLowerCase());
+                    stopWords.add(stopWord.toUpperCase());
                 }
             } catch(IOException ex) {
                 System.err.println("Exception while reading stop words file: " + ex.getMessage());
