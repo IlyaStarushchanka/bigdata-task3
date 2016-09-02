@@ -52,10 +52,9 @@ public class VisitsAndSpendsCount {
         protected void reduce(Text ip, Iterable<VisitsAndSpendsWritable> values, Context context) throws IOException, InterruptedException {
             int sumPrice = 0;
             int sumVisits = 0;
-            Iterator<VisitsAndSpendsWritable> itr = values.iterator();
-            while (itr.hasNext()){
-                sumPrice += itr.next().getSpendsCount();
-                sumVisits += itr.next().getVisitsCount();
+            for (VisitsAndSpendsWritable val : values) {
+                sumPrice += val.getSpendsCount();
+                sumVisits += val.getVisitsCount();
             }
             result.setVisitsCount(sumVisits);
             result.setSpendsCount(sumPrice);
