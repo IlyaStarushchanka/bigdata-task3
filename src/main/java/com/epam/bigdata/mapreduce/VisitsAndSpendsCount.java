@@ -1,5 +1,6 @@
 package com.epam.bigdata.mapreduce;
 
+import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -7,6 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.compress.SnappyCodec;
+import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -45,16 +47,16 @@ public class VisitsAndSpendsCount {
                 visitsAndSpendsWritable.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
                 context.write(ip, visitsAndSpendsWritable);
             }
-            Pattern p2 = Pattern.compile("(?<=(\\w+\\s\\d+\\s\\w+\\s)).*(?=\\s(\\d+[.]){3,}(\\d+|\\*))");
+            /*Pattern p2 = Pattern.compile("(?<=(\\w+\\s\\d+\\s\\w+\\s)).*(?=\\s(\\d+[.]){3,}(\\d+|\\*))");
             Matcher m2 = p2.matcher(line);
             if (m2.find()) {
                 String result = m2.group();
                 UserAgent userAgent = UserAgent.parseUserAgentString(result);
                 System.out.println(result);
                 System.out.println("User Agent - " + userAgent.getBrowser());
-            }
-            //UserAgent userAgent = UserAgent.parseUserAgentString(line);
-            //System.out.println("User Agent - " + userAgent.getBrowser());
+            }*/
+            UserAgent userAgent = UserAgent.parseUserAgentString(line);
+            context.getCounter(userAgent.getBrowser()).increment(1);
         }
     }
 
@@ -111,7 +113,9 @@ public class VisitsAndSpendsCount {
         for (Counter counter : job.getCounters().getGroup(Browser.class.getCanonicalName())) {
             System.out.println(" - " + counter.getDisplayName() + ": " + counter.getValue());
         }*/
-
+        for (Counter counter : job.getCounters().getGroup(Browser.class.getCanonicalName())) {
+            System.out.println(" - " + counter.getDisplayName() + ": " + counter.getValue());
+        }
         System.exit(result ? 0 : 1);
     }
 
