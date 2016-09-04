@@ -3,6 +3,7 @@ package com.epam.bigdata.mapreduce;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.compress.SnappyCodec;
 import org.apache.hadoop.mapreduce.Job;
@@ -10,6 +11,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 import java.io.IOException;
@@ -83,15 +85,14 @@ public class VisitsAndSpendsCount {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(VisitsAndSpendsWritable.class);
 
-
-        //FileOutputFormat.setCompressOutput(job, true);
-        //FileOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
-        //job.setOutputFormatClass(SequenceFileOutputFormat.class);
+        FileOutputFormat.setCompressOutput(job, true);
+        FileOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
+        job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
-        FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
-        //SequenceFileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
-        //SequenceFileOutputFormat.setOutputCompressionType(job, SequenceFile.CompressionType.BLOCK);
+        //FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
+        SequenceFileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
+        SequenceFileOutputFormat.setOutputCompressionType(job, SequenceFile.CompressionType.BLOCK);
 
         boolean result = job.waitForCompletion(true);
 
