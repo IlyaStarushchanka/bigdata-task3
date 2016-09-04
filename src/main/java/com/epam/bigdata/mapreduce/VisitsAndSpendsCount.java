@@ -37,7 +37,7 @@ public class VisitsAndSpendsCount {
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] columns = line.split("\\s+");
-            Pattern p = Pattern.compile("(\\d+[.]){3,}(\\d+|\\*)");
+            Pattern p = Pattern.compile("(\\d+[.]){3,}\\*");
             Matcher m = p.matcher(line);
 
             if (m.find()){
