@@ -49,9 +49,9 @@ public class VisitsAndSpendsCount {
             Matcher m2 = p2.matcher(line);
             if (m2.find()) {
                 String result = m2.group();
-                //UserAgent userAgent = UserAgent.parseUserAgentString(result);
+                UserAgent userAgent = new UserAgent(result);
                 System.out.println(result);
-                //System.out.println("User Agent - " + userAgent.getBrowser());
+                System.out.println("User Agent - " + userAgent.getBrowser());
             }
             //UserAgent userAgent = UserAgent.parseUserAgentString(line);
             //System.out.println("User Agent - " + userAgent.getBrowser());
