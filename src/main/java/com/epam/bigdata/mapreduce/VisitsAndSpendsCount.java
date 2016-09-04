@@ -84,8 +84,8 @@ public class VisitsAndSpendsCount {
         job.setOutputValueClass(VisitsAndSpendsWritable.class);
 
 
-        FileOutputFormat.setCompressOutput(job, true);
-        FileOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
+        //FileOutputFormat.setCompressOutput(job, true);
+        //FileOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
         //job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
         FileInputFormat.addInputPath(job, new Path(otherArgs[0]));
