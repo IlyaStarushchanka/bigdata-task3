@@ -47,16 +47,17 @@ public class VisitsAndSpendsCount {
                 visitsAndSpendsWritable.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
                 context.write(ip, visitsAndSpendsWritable);
             }
-            /*Pattern p2 = Pattern.compile("(?<=(\\w+\\s\\d+\\s\\w+\\s)).*(?=\\s(\\d+[.]){3,}(\\d+|\\*))");
+            Pattern p2 = Pattern.compile("(?<=(\\w+\\s\\d+\\s\\w+\\s)).*(?=\\s(\\d+[.]){3,}(\\d+|\\*))");
             Matcher m2 = p2.matcher(line);
             if (m2.find()) {
                 String result = m2.group();
                 UserAgent userAgent = UserAgent.parseUserAgentString(result);
                 System.out.println(result);
                 System.out.println("User Agent - " + userAgent.getBrowser());
-            }*/
-            UserAgent userAgent = UserAgent.parseUserAgentString(line);
-            context.getCounter(userAgent.getBrowser()).increment(1);
+                context.getCounter(userAgent.getBrowser()).increment(1);
+            }
+            //UserAgent userAgent = UserAgent.parseUserAgentString(line);
+            //context.getCounter(userAgent.getBrowser()).increment(1);
         }
     }
 
