@@ -29,6 +29,11 @@
             <artifactId>hadoop-client</artifactId>
             <version>2.7.2</version>
         </dependency>
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.20</version>
+        </dependency>
     </dependencies>
 
     <build>

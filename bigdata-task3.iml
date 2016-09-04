@@ -102,5 +102,6 @@
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.7.2" level="project" />
+    <orderEntry type="library" name="Maven: eu.bitwalker:UserAgentUtils:1.20" level="project" />
   </component>
 </module>

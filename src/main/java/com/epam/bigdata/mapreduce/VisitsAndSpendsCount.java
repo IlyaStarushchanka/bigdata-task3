@@ -1,5 +1,6 @@
 package com.epam.bigdata.mapreduce;
 
+import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -44,6 +45,8 @@ public class VisitsAndSpendsCount {
                 visitsAndSpendsWritable.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
                 context.write(ip, visitsAndSpendsWritable);
             }
+            UserAgent userAgent = UserAgent.parseUserAgentString(line);
+            System.out.println("User Agent - " + userAgent.getBrowser());
         }
     }
 
