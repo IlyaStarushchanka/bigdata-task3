@@ -47,7 +47,8 @@ public class VisitsAndSpendsCount {
                 visitsAndSpendsWritable.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
                 context.write(ip, visitsAndSpendsWritable);
 
-                UserAgent userAgent = UserAgent.parseUserAgentString(line);
+                //UserAgent userAgent = UserAgent.parseUserAgentString(line);
+                UserAgent userAgent = new UserAgent(line);
                 System.out.println(userAgent.getBrowser());
                 context.getCounter(userAgent.getBrowser()).increment(1);
             }
