@@ -46,6 +46,9 @@ public class VisitsAndSpendsCount {
                 visitsAndSpendsWritable.setVisitsCount(1);
                 visitsAndSpendsWritable.setSpendsCount(Integer.parseInt(columns[columns.length - 4]));
                 context.write(ip, visitsAndSpendsWritable);
+
+                UserAgent userAgent = UserAgent.parseUserAgentString(line);
+                context.getCounter(userAgent.getBrowser()).increment(1);
             }
             /*Pattern p2 = Pattern.compile("(?<=(\\w+\\s\\d+\\s\\w+\\s)).*(?=\\s(\\d+[.]){3,}(\\d+|\\*))");
             Matcher m2 = p2.matcher(line);
@@ -56,8 +59,7 @@ public class VisitsAndSpendsCount {
                 System.out.println("User Agent - " + userAgent.getBrowser());
                 context.getCounter(userAgent.getBrowser()).increment(1);
             }*/
-            UserAgent userAgent = UserAgent.parseUserAgentString(line);
-            context.getCounter(userAgent.getBrowser()).increment(1);
+
         }
     }
 
