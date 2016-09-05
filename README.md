@@ -17,3 +17,10 @@ Where
 `out` - path for output,
 
 `inoptional` - optional parameter, path to file with stopwords (1 word in 1 line).
+
+For example:
+
+```
+yarn jar /root/IdeaProjects/bigdata-task3/target/bigdata-task3-1.0-SNAPSHOT-jar-with-dependencies.jar com.epam.bigdata.mapreduce.TagsCount /tmp/admin/user.profile.tags.us.min.out.txt /tmp/admin/tagscountout.txt /tmp/admin/stopWords.txt
+```
+
