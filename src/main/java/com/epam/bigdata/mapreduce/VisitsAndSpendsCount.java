@@ -113,9 +113,9 @@ public class VisitsAndSpendsCount {
 
         boolean result = job.waitForCompletion(true);
 
-        for (Counter counter : job.getCounters().getGroup(Browser.class.getCanonicalName())) {
+        /*for (Counter counter : job.getCounters().getGroup(Browser.class.getCanonicalName())) {
             System.out.println(" - " + counter.getDisplayName() + ": " + counter.getValue());
-        }
+        }*/
         System.exit(result ? 0 : 1);
     }
 
