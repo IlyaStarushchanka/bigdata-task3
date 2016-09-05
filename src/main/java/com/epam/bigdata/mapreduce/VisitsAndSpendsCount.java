@@ -48,6 +48,7 @@ public class VisitsAndSpendsCount {
                 context.write(ip, visitsAndSpendsWritable);
 
                 UserAgent userAgent = UserAgent.parseUserAgentString(line);
+                System.out.println(userAgent.getBrowser());
                 context.getCounter(userAgent.getBrowser()).increment(1);
             }
             /*Pattern p2 = Pattern.compile("(?<=(\\w+\\s\\d+\\s\\w+\\s)).*(?=\\s(\\d+[.]){3,}(\\d+|\\*))");
@@ -112,10 +113,6 @@ public class VisitsAndSpendsCount {
 
         boolean result = job.waitForCompletion(true);
 
-        /*System.out.println("Browsers Counter :");
-        for (Counter counter : job.getCounters().getGroup(Browser.class.getCanonicalName())) {
-            System.out.println(" - " + counter.getDisplayName() + ": " + counter.getValue());
-        }*/
         for (Counter counter : job.getCounters().getGroup(Browser.class.getCanonicalName())) {
             System.out.println(" - " + counter.getDisplayName() + ": " + counter.getValue());
         }
