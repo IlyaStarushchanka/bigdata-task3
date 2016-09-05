@@ -1,10 +1,10 @@
 # bigdata-task3 "MapReduce"
 
-Build project 
+###Build project 
 ```
 mvn clean install
 ```
-Run tags count task
+###Run tags count task
 
 ```
 yarn jar ${PathToProject}/bigdata-task3/target/bigdata-task3-1.0-SNAPSHOT-jar-with-dependencies.jar com.epam.bigdata.mapreduce.TagsCount <in> <out> <inoptional>
@@ -23,7 +23,7 @@ For example:
 ```
 yarn jar /root/IdeaProjects/bigdata-task3/target/bigdata-task3-1.0-SNAPSHOT-jar-with-dependencies.jar com.epam.bigdata.mapreduce.TagsCount /tmp/admin/user.profile.tags.us.min.out.txt /tmp/admin/tagscountout.txt /tmp/admin/stopWords.txt
 ```
-Run visits and spends count task
+###Run visits and spends count task
 
 ```
 yarn jar ${PathToProject}/bigdata-task3/target/bigdata-task3-1.0-SNAPSHOT-jar-with-dependencies.jar com.epam.bigdata.mapreduce.VisitsAndSpendsCount <in> <out>
